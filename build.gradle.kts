@@ -16,6 +16,5 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    implementation(kotlin("scripting-jvm"))
     testImplementation("junit:junit:4.12")
 }
