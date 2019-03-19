@@ -6,13 +6,13 @@ data class Node(
     val state: State,
     val directions: LinkedList<Direction> = LinkedList(),
     val inverse: Boolean = false,
-    val heuristic: ManhattanHeuristic
+    val heuristic: ManhattanHeuristic = ManhattanHeuristic(state, state)
 ) : Comparable<Node> {
 
-    fun move(emptyPlace: Pair<Int, Int>, direction: Direction): Result<Node> {
+    fun move(direction: Direction): Result<Node> {
         return if (state.canMove(direction) && isNotSameAsLastDirection(direction)) {
             val newState = state.copy()
-            moveDirect(newState.state, emptyPlace, direction)
+            moveDirect(newState.state, state.emptyPlace, direction)
 
             val newNode = Node(newState, LinkedList(directions), inverse, ManhattanHeuristic(newState, heuristic.finalState))
             newNode.directions.add(direction)

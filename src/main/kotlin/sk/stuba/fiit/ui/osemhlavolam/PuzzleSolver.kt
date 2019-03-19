@@ -6,7 +6,7 @@ class PuzzleSolver(
 ) {
     val unprocessed = mutableListOf<Node>()
 
-    fun solve() {
+    fun solve(): List<Direction> {
         unprocessed.add(Node(initialState, heuristic = ManhattanHeuristic(initialState, finalState)))
         unprocessed.add(Node(finalState, inverse = true, heuristic = ManhattanHeuristic(finalState, finalState)))
 
@@ -27,8 +27,7 @@ class PuzzleSolver(
                             allDirections.addAll(it.directions)
                             allDirections.addAll(secondNode.directions)
                         }
-                        println(allDirections)
-                        return
+                        return allDirections
                     }
                 } else {
                     unprocessed.add(it)
@@ -40,9 +39,8 @@ class PuzzleSolver(
 
     fun generateStates(node: Node): List<Node> {
         val nodes = mutableListOf<Node>()
-        val position = node.state.emptyPlace
         Direction.values().forEach { direction ->
-            val result = node.move(position, direction)
+            val result = node.move(direction)
             result.onSuccess { nodes.add(it) }
         }
         return nodes
