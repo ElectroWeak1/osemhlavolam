@@ -2,4 +2,4 @@
 UI zadanie 2
 
 ## Spustenie
-Na spustenie projektu stačí zadať `./gradlew -q run`
+Pre spustenie všetkých JUnit testov stačí zadať `./gradlew -q test`

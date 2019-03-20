@@ -6,11 +6,7 @@ plugins {
 }
 
 group = "ui"
-version = "1.0-SNAPSHOT"
-
-application {
-    mainClassName = "sk.stuba.fiit.ui.osemhlavolam.MainKt"
-}
+version = "0.1"
 
 repositories {
     mavenCentral()
