@@ -30,6 +30,17 @@ class State(
         throw IllegalStateException("Could not find empty tile in map\n$map")
     }
 
+    fun findTilePosition(tile: Int): Pair<Int, Int> {
+        for (i in 0 until rows) {
+            for  (j in 0 until columns) {
+                if (map[i][j] == tile) {
+                    return i to j
+                }
+            }
+        }
+        throw IllegalArgumentException("Cannot find tile in state map")
+    }
+
     /**
      * Applies operator to 8-puzzle state and creates a result with new state. If operator cannot be applied to that
      * state, returns result with exception.
@@ -56,6 +67,6 @@ class State(
     private fun copy() = State(map.deepCopy())
 
     companion object {
-        private const val EMPTY_TILE = 0
+        const val EMPTY_TILE = 0
     }
 }
