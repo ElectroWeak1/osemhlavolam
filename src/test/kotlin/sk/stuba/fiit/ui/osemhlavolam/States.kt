@@ -1,6 +1,8 @@
 package sk.stuba.fiit.ui.osemhlavolam
 
 object States {
+    val emptyMap = arrayOf<IntArray>()
+
     val basicMap = arrayOf(
         intArrayOf(1, 2, 3),
         intArrayOf(4, 5, 6),
@@ -18,5 +20,11 @@ object States {
         intArrayOf(1, 2, 3),
         intArrayOf(4, 0, 6),
         intArrayOf(7, 5, 8)
+    )
+
+    val basicWithoutEmptyTile = arrayOf(
+        intArrayOf(1, 2, 3),
+        intArrayOf(4, 5, 6),
+        intArrayOf(7, 8, 9)
     )
 }
