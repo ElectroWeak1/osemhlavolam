@@ -54,4 +54,34 @@ class StateTest {
         val state = State(States.basicWithoutEmptyTile)
         state.emptyTilePosition
     }
+
+    @Test
+    fun `Test simple operator`() {
+        val state = State(States.biggerMap)
+        val newState = state.apply(Operator.DOWN).getOrThrow()
+        assertArrayEquals(newState.map, States.biggerMapSimpleDown)
+    }
+
+    @Test
+    fun `Test all operators`() {
+        val state = State(States.operatorMap)
+
+        val leftState = state.apply(Operator.LEFT).getOrThrow()
+        assertArrayEquals(leftState.map, States.operatorMapLeft)
+
+        val upState = leftState.apply(Operator.UP).getOrThrow()
+        assertArrayEquals(upState.map, States.operatorMapUp)
+
+        val rightState = upState.apply(Operator.RIGHT).getOrThrow()
+        assertArrayEquals(rightState.map, States.operatorMapRight)
+
+        val downState = rightState.apply(Operator.DOWN).getOrThrow()
+        assertArrayEquals(downState.map, States.operatorMapDown)
+    }
+
+    @Test(expected = IllegalStateException::class)
+    fun `Test invalid state after operator`() {
+        val state = State(States.basicMap)
+        state.apply(Operator.UP).getOrThrow()
+    }
 }
