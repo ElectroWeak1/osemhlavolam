@@ -3,6 +3,9 @@ package sk.stuba.fiit.ui.osemhlavolam.heuristic
 import sk.stuba.fiit.ui.osemhlavolam.State
 import sk.stuba.fiit.ui.osemhlavolam.distance
 
+/**
+ * Heuristic that computes distances of each tile to final state tiles.
+ */
 class ManhattanHeuristic : Heuristic {
     override fun compute(state: State, finalState: State): Int {
         var heuristic = 0

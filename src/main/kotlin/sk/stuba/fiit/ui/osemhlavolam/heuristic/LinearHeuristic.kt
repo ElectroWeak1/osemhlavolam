@@ -2,6 +2,9 @@ package sk.stuba.fiit.ui.osemhlavolam.heuristic
 
 import sk.stuba.fiit.ui.osemhlavolam.State
 
+/**
+ * Simple heuristic which computes how many tiles are out of position in relation to final state.
+ */
 class LinearHeuristic : Heuristic {
     override fun compute(state: State, finalState: State): Int {
         var heuristic = 0
