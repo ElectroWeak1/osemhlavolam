@@ -3,7 +3,7 @@ package sk.stuba.fiit.ui.osemhlavolam
 /**
  * Represents constant state for 8-puzzle with empty tile in two-dimensional array of ints
  */
-class State(
+data class State(
     val map: Map
 ) {
     val rows = map.size
@@ -76,6 +76,11 @@ class State(
     }
 
     override fun hashCode() = map.contentDeepHashCode()
+
+    override fun toString(): String {
+        val mapString = map.joinToString { it.joinToString(prefix = "[", postfix = "]") { tile -> tile.toString() } }
+        return "State(map=[$mapString]), operators=[RIGHT])"
+    }
 
     companion object {
         const val EMPTY_TILE = 0

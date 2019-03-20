@@ -9,6 +9,18 @@ object States {
         intArrayOf(7, 8, 0)
     )
 
+    val basicRightMap = arrayOf(
+        intArrayOf(1, 2, 3),
+        intArrayOf(4, 5, 6),
+        intArrayOf(7, 0, 8)
+    )
+
+    val basicDownMap = arrayOf(
+        intArrayOf(1, 2, 3),
+        intArrayOf(4, 5, 0),
+        intArrayOf(7, 8, 6)
+    )
+
     val biggerMap = arrayOf(
         intArrayOf( 1,  2,  3,  4,  5,  6),
         intArrayOf( 7,  8,  9, 10, 11, 12),
