@@ -66,6 +66,17 @@ class State(
 
     private fun copy() = State(map.deepCopy())
 
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is State) return false
+
+        if (!map.contentDeepEquals(other.map)) return false
+
+        return true
+    }
+
+    override fun hashCode() = map.contentDeepHashCode()
+
     companion object {
         const val EMPTY_TILE = 0
     }

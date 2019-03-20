@@ -84,4 +84,13 @@ class StateTest {
         val state = State(States.basicMap)
         state.apply(Operator.UP).getOrThrow()
     }
+
+    @Test
+    fun `Test compare two equal states`() {
+        val state1 = State(States.basicMap)
+        val state2 = State(States.basicMap)
+
+        assertNotSame(state1, state2)
+        assertEquals(state1, state2)
+    }
 }
