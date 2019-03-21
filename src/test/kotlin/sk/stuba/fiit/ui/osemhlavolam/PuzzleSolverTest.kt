@@ -31,6 +31,16 @@ class PuzzleSolverTest {
     }
 
     @Test
+    fun `Test solve medium state`() {
+        val solver = PuzzleSolver(
+            Node(State(States.mediumMap)),
+            Node(State(States.mediumFinalMap), inverse = true)
+        )
+        val finalNode = solve(solver)
+        checkSolution(State(States.mediumMap), finalNode)
+    }
+
+    @Test
     fun `Test solve hard state`() {
         val solver = PuzzleSolver(
             Node(State(States.hardMap)),
@@ -43,10 +53,16 @@ class PuzzleSolverTest {
     private fun solve(solver: PuzzleSolver): Node {
         while (solver.hasUnprocessedNode()) {
             val nextNode = solver.pollNextUnprocessedNode()
+            if (solver.isInverseInVisited(nextNode)) {
+                val visitedNode = solver.getInverseVisitedNode(nextNode)
+                val finalNode = solver.combineNodes(nextNode, visitedNode)
+                println(finalNode)
+                return finalNode
+            }
             val possibleNodes = solver.visitNode(nextNode)
             val result = solver.insertUnprocessedNodes(possibleNodes)
             if (result.isSuccess) {
-                println(result.getOrThrow())
+                println("Found result but not taking into account ${result.getOrThrow()}")
                 return result.getOrThrow()
             }
         }

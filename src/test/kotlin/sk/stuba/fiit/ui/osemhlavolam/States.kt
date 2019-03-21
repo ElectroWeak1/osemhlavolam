@@ -109,15 +109,29 @@ object States {
         intArrayOf(0 , 20, 8, 22, 23, 19)
     )
 
-    val hardMap = arrayOf(
+    val mediumMap = arrayOf(
         intArrayOf(7, 6, 8),
         intArrayOf(4, 5, 2),
         intArrayOf(0, 3, 1)
     )
 
-    val hardFinalMap = arrayOf(
+    val mediumFinalMap = arrayOf(
         intArrayOf(1, 2, 3),
         intArrayOf(4, 5, 6),
         intArrayOf(7, 8, 0)
+    )
+
+    val hardMap = arrayOf(
+        intArrayOf(12,  7,  9,  4),
+        intArrayOf(15,  6,  8,  5),
+        intArrayOf( 0, 14, 10, 11),
+        intArrayOf(13,  2,  3,  1)
+    )
+
+    val hardFinalMap = arrayOf(
+        intArrayOf( 1,  2,  3,  4),
+        intArrayOf( 5,  6,  7,  8),
+        intArrayOf( 9, 10, 11, 12),
+        intArrayOf(13, 14, 15,  0)
     )
 }

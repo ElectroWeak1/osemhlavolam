@@ -8,6 +8,10 @@ plugins {
 group = "ui"
 version = "0.1"
 
+application {
+    mainClassName = "sk.stuba.fiit.ui.osemhlavolam.MapTestKt"
+}
+
 repositories {
     mavenCentral()
 }
