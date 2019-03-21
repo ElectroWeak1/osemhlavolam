@@ -13,4 +13,11 @@ enum class Operator(
     UP(1, 0),
     RIGHT(0, -1),
     DOWN(-1, 0);
+
+    fun inverseOperator() = when (this) {
+        LEFT -> RIGHT
+        UP -> DOWN
+        RIGHT -> LEFT
+        DOWN -> UP
+    }
 }

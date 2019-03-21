@@ -9,7 +9,8 @@ import java.util.*
  */
 data class Node(
     val state: State,
-    val operators: MutableList<Operator> = LinkedList()
+    val operators: MutableList<Operator> = LinkedList(),
+    val inverse: Boolean = false
 ) {
     /**
      * Creates new node with by copying this state and operators and applying provided operator to new state and adds
@@ -19,6 +20,9 @@ data class Node(
      * @throws IllegalStateException when operator cannot be applied to current node state
      */
     fun apply(operator: Operator): Result<Node> {
+        if (operators.isNotEmpty() && operators.last() == operator.inverseOperator()) {
+            return Result.failure(IllegalStateException("Cannot apply previous operator $operator to state\n$this\n"))
+        }
         val newState = state.apply(operator)
         newState.onFailure {
             return Result.failure(IllegalStateException("Cannot apply operator $operator to state\n$this\n" +
@@ -26,6 +30,6 @@ data class Node(
         }
         val newOperators = LinkedList(operators)
         newOperators.add(operator)
-        return Result.success(Node(newState.getOrThrow(), newOperators))
+        return Result.success(Node(newState.getOrThrow(), newOperators, inverse))
     }
 }

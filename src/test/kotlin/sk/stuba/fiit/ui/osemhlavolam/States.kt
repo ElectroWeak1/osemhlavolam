@@ -9,6 +9,12 @@ object States {
         intArrayOf(7, 8, 0)
     )
 
+    val basicFinalMap = arrayOf(
+        intArrayOf(1, 2, 3),
+        intArrayOf(4, 6, 8),
+        intArrayOf(7, 5, 0)
+    )
+
     val basicRightMap = arrayOf(
         intArrayOf(1, 2, 3),
         intArrayOf(4, 5, 6),
@@ -101,5 +107,17 @@ object States {
         intArrayOf( 7, 21, 9, 10,  1, 12),
         intArrayOf(17, 14, 4, 16, 13, 18),
         intArrayOf(0 , 20, 8, 22, 23, 19)
+    )
+
+    val hardMap = arrayOf(
+        intArrayOf(7, 6, 8),
+        intArrayOf(4, 5, 2),
+        intArrayOf(0, 3, 1)
+    )
+
+    val hardFinalMap = arrayOf(
+        intArrayOf(1, 2, 3),
+        intArrayOf(4, 5, 6),
+        intArrayOf(7, 8, 0)
     )
 }

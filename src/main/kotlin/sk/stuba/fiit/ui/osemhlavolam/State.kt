@@ -79,7 +79,7 @@ data class State(
 
     override fun toString(): String {
         val mapString = map.joinToString { it.joinToString(prefix = "[", postfix = "]") { tile -> tile.toString() } }
-        return "State(map=[$mapString]), operators=[RIGHT])"
+        return "State(map=[$mapString]))"
     }
 
     companion object {
