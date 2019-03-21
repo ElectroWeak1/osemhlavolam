@@ -7,10 +7,11 @@ import java.util.*
  * inverted operators we can backtrack to original state. This means we don't need to keep track of previous states as
  * we can create them with operators.
  */
-data class Node(
+open class Node(
     val state: State,
     val operators: MutableList<Operator> = LinkedList(),
-    val inverse: Boolean = false
+    val inverse: Boolean = false,
+    var heuristic: Int = 0
 ) {
     /**
      * Creates new node with by copying this state and operators and applying provided operator to new state and adds
@@ -32,4 +33,26 @@ data class Node(
         newOperators.add(operator)
         return Result.success(Node(newState.getOrThrow(), newOperators, inverse))
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Node) return false
+
+        if (state != other.state) return false
+        if (operators != other.operators) return false
+        if (inverse != other.inverse) return false
+        if (heuristic != other.heuristic) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = state.hashCode()
+        result = 31 * result + operators.hashCode()
+        result = 31 * result + inverse.hashCode()
+        result = 31 * result + heuristic
+        return result
+    }
+
+    override fun toString() = "Node($state, $operators, $inverse, $heuristic)"
 }

@@ -1,7 +1,9 @@
 package sk.stuba.fiit.ui.osemhlavolam
 
 import sk.stuba.fiit.ui.osemhlavolam.heuristic.Heuristic
+import sk.stuba.fiit.ui.osemhlavolam.heuristic.HeuristicComparator
 import sk.stuba.fiit.ui.osemhlavolam.heuristic.ManhattanHeuristic
+import java.util.*
 
 /**
  * Solver for 8-puzzle. Contains methods that help solve 8-puzzle.
@@ -11,11 +13,13 @@ class PuzzleSolver(
     private val finalNode: Node,
     private val heuristic: Heuristic = ManhattanHeuristic()
 ) {
-    private val unprocessedNodes = MultiHashMap<Int, Node>()
+    private val heuristicComparator = HeuristicComparator()
+    private val unprocessedNodes = PriorityQueue<Node>(heuristicComparator)
     private val visitedStates = HashSet<State>()
 
     init {
-        unprocessedNodes[heuristic.compute(initialNode.state, finalNode.state)] = initialNode
+        initialNode.heuristic = heuristic.compute(initialNode.state, finalNode.state)
+        unprocessedNodes.add(initialNode)
     }
 
     /**
@@ -46,7 +50,8 @@ class PuzzleSolver(
             if (it.state == finalNode.state) {
                 return Result.success(it)
             }
-            unprocessedNodes[heuristic.compute(it.state, finalNode.state)] = it
+            it.heuristic = heuristic.compute(it.state, finalNode.state)
+            unprocessedNodes.add(it)
         }
         return Result.failure(IllegalStateException("Couldn't find solution in inserted nodes"))
     }
@@ -60,16 +65,5 @@ class PuzzleSolver(
     /**
      * Gets and removes next unprocessedNodes node
      */
-    fun pollNextUnprocessedNode(): Node {
-        var heuristicValue = 0
-        while (true) {
-            val nodeList = unprocessedNodes[heuristicValue]
-            if (nodeList != null && nodeList.isNotEmpty()) {
-                val node = nodeList[0]
-                nodeList.remove(node)
-                return node
-            }
-            heuristicValue++
-        }
-    }
+    fun pollNextUnprocessedNode() = unprocessedNodes.poll()!!
 }
