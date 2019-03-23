@@ -20,8 +20,8 @@ class PuzzleSolver(
     private var nextNormal = true
 
     init {
-//        initialNode.heuristic = heuristic.compute(initialNode.state, finalNode.state)
-//        finalNode.heuristic = heuristic.compute(finalNode.state, initialNode.state)
+        initialNode.heuristic = heuristic.compute(initialNode.state, finalNode.state)
+        finalNode.heuristic = heuristic.compute(finalNode.state, initialNode.state)
         unprocessedNodes.add(initialNode)
         unprocessedNodes.add(finalNode)
     }
@@ -56,7 +56,7 @@ class PuzzleSolver(
             if (node.state == finalNode.state) {
                 return Result.success(node)
             }
-//            node.heuristic = heuristic.compute(node.state, if (node.inverse) initialNode.state else finalNode.state)
+            node.heuristic = heuristic.compute(node.state, if (node.inverse) initialNode.state else finalNode.state)
             unprocessedNodes.add(node)
         }
         return Result.failure(IllegalStateException("Couldn't find solution in inserted nodes"))

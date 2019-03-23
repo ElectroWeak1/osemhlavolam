@@ -22,14 +22,13 @@ open class Node(
      */
     fun apply(operator: Operator): Result<Node> {
         if (operators.isNotEmpty() && operators.last() == operator.inverseOperator()) {
-            return Result.failure(IllegalStateException("Cannot apply previous operator $operator to state\n$this\n"))
+            return Result.failure(IllegalStateException())
         }
         val newState = state.apply(operator)
         newState.onFailure {
-            return Result.failure(IllegalStateException("Cannot apply operator $operator to state\n$this\n" +
-                "because new state would not be valid"))
+            return Result.failure(IllegalStateException())
         }
-        val newOperators = LinkedList(operators)
+        val newOperators = ArrayList(operators)
         newOperators.add(operator)
         return Result.success(Node(newState.getOrThrow(), newOperators, inverse))
     }
